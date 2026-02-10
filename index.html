@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Diego G. Serra – Analista Funcional Técnico</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- SEO básico -->
+    <meta name="description"
+        content="Diego G. Serra – Analista Funcional Técnico especializado en sistemas, integraciones, automatización de procesos e IA aplicada. Perfil remoto para startups y empresas de producto.">
+    <meta name="keywords"
+        content="Analista Funcional Técnico, Sistemas, Integraciones, Automatización de Procesos, IA aplicada, Diego G Serra, Analista de Sistemas remoto">
+    <meta name="author" content="Diego G. Serra">
+    <link rel="canonical" href="https://diegoger.dev/">
+
+    <!-- Open Graph (LinkedIn, WhatsApp, etc.) -->
+    <meta property="og:title" content="Diego G. Serra – Analista Funcional Técnico">
+    <meta property="og:description"
+        content="Analista Funcional Técnico especializado en sistemas, integraciones y automatización con IA. Perfil remoto.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://diegoger.dev/">
+    <meta property="og:image" content="https://diegoger.dev/og-image.png">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Diego G. Serra – Analista Funcional Técnico">
+    <meta name="twitter:description" content="Sistemas, integraciones y automatización de procesos con IA aplicada.">
+    <meta name="twitter:image" content="https://diegoger.dev/og-image.png">
+
+    <!-- Datos estructurados para buscadores e IA -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Diego G. Serra",
+    "jobTitle": "Analista Funcional Técnico",
+    "url": "https://diegoger.dev/",
+    "email": "mailto:hola@diegoger.dev",
+    "sameAs": [
+      "https://linkedin.com/in/diego-serra"
+    ],
+    "knowsAbout": [
+      "Análisis Funcional",
+      "Integración de Sistemas",
+      "Automatización de Procesos",
+      "IA aplicada",
+      "Sistemas de Facturación",
+      "Testing End-to-End",
+      "Productos Digitales"
+    ]
+  }
+  </script>
+
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <button id="theme-toggle" aria-label="Cambiar tema">
+        <!-- Sun Icon (for dark mode) -->
+        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon Icon (for light mode) -->
+        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <script>
+        // Theme persistence — runs early to prevent flash
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        const toggleButton = document.getElementById('theme-toggle');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            let theme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
+        });
+    </script>
+
+    <!-- Fluid liquid background -->
+    <div class="fluid-bg" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+    </div>
+
+    <main class="container">
+
+        <!-- Header with animated avatar -->
+        <header class="header reveal">
+            <h1>Diego G. Serra</h1>
+            <h2>Analista Funcional Técnico</h2>
+            <p class="location">📍 Argentina · Remoto</p>
+        </header>
+
+        <!-- About -->
+        <section class="card-spotlight reveal">
+            <p>
+                Analista Funcional Técnico con experiencia en sistemas críticos,
+                integraciones y productos digitales. Trabajo como nexo entre negocio
+                y desarrollo, participando en análisis end-to-end, documentación
+                funcional/técnica y validación E2E.
+            </p>
+            <p>
+                Actualmente en formación en <strong>automatización de procesos mediante IA agentiva</strong>,
+                explorando workflows inteligentes y optimización de flujos operativos.
+            </p>
+        </section>
+
+        <!-- Experience -->
+        <section class="card-spotlight reveal">
+            <h3>💼 Experiencia destacada</h3>
+            <ul>
+                <li>Análisis funcional y técnico de sistemas de facturación</li>
+                <li>Integraciones REST / SOAP entre sistemas</li>
+                <li>Documentación funcional y técnica</li>
+                <li>Testing funcional, UAT y pruebas end-to-end</li>
+                <li>Trabajo cercano con equipos de desarrollo</li>
+            </ul>
+        </section>
+
+        <!-- Skills -->
+        <section class="card-spotlight reveal">
+            <h3>🛠️ Habilidades</h3>
+            <div class="skills">
+                <span>Análisis Funcional (E2E)</span>
+                <span>Integraciones de Sistemas</span>
+                <span>SQL / PL-SQL</span>
+                <span>Testing Funcional</span>
+                <span>Oracle CC&B</span>
+                <span>Automatización de Procesos</span>
+                <span>IA aplicada (en formación)</span>
+            </div>
+        </section>
+
+        <!-- Download CV -->
+        <section class="actions reveal">
+            <a class="button" href="Diego_G_Serra_CV.pdf" target="_blank">
+                📄 Descargar CV en PDF
+            </a>
+        </section>
+
+        <!-- CTA Contact Section -->
+        <section class="cta card-spotlight reveal">
+            <h3>🚀 ¿Buscás un Analista Funcional?</h3>
+            <p class="cta-text">Estoy abierto a nuevas oportunidades en equipos de producto, startups y empresas que
+                apuesten por la innovación. ¡Hablemos!</p>
+            <div class="cta-buttons">
+                <a class="button" href="mailto:hola@diegoger.dev">
+                    ✉️ Escribime
+                </a>
+                <a class="button button-outline" href="https://linkedin.com/in/diego-serra" target="_blank">
+                    💼 LinkedIn
+                </a>
+            </div>
+        </section>
+
+        <footer class="reveal">
+            <p>
+                © 2026 Diego G. Serra · Hecho con dedicación
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- Scroll-triggered animations + Spotlight effect -->
+    <script>
+        // ── Intersection Observer: Reveal on Scroll ──
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target); // only once
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ── Spotlight Effect on Cards ──
+        const spotlightCards = document.querySelectorAll('.card-spotlight');
+
+        spotlightCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
