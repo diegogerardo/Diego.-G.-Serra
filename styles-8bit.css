@@ -1,0 +1,898 @@
+/* ═══════════════════════════════════════════
+   Diego. Gerardo. Serra – CV Online
+   8-BIT RETRO EDITION 🎮
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* ─── CSS Variables ─── */
+:root {
+    --black: #0a0a0a;
+    --darkgray: #1a1a2e;
+    --midgray: #16213e;
+    --panel: #0f0f23;
+    --green: #39ff14;
+    --cyan: #00ffff;
+    --yellow: #ffe600;
+    --magenta: #ff00ff;
+    --red: #ff2244;
+    --white: #f0f0f0;
+    --pixel: 2px;
+    --font: 'Press Start 2P', monospace;
+}
+
+/* ─── Base Reset ─── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    image-rendering: pixelated;
+}
+
+body {
+    font-family: var(--font);
+    background-color: var(--black);
+    color: var(--white);
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ─── Scanlines overlay ─── */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.08) 2px,
+            rgba(0, 0, 0, 0.08) 4px);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* ─── CRT flicker ─── */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.55) 100%);
+    z-index: 9998;
+    pointer-events: none;
+}
+
+/* ─── Pixel background grid ─── */
+.pixel-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-color: var(--black);
+    background-image:
+        linear-gradient(rgba(0, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    animation: bgScroll 20s linear infinite;
+}
+
+@keyframes bgScroll {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 0 128px;
+    }
+}
+
+/* ─── Container ─── */
+.container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 4rem 1.25rem 6rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ─── Pixel Box (card) ─── */
+.pixel-box {
+    background: var(--panel);
+    border: 4px solid var(--cyan);
+    padding: 2rem 2.25rem;
+    margin-bottom: 2rem;
+    position: relative;
+    box-shadow:
+        0 0 0 2px var(--black),
+        6px 6px 0 0 var(--cyan);
+    transition: box-shadow 0.15s steps(1);
+}
+
+.pixel-box:hover {
+    box-shadow:
+        0 0 0 2px var(--black),
+        8px 8px 0 0 var(--cyan),
+        0 0 20px rgba(0, 255, 255, 0.25);
+}
+
+/* Corner decorations */
+.pixel-box::before,
+.pixel-box::after {
+    content: '■';
+    position: absolute;
+    color: var(--cyan);
+    font-size: 0.7rem;
+    line-height: 1;
+}
+
+.pixel-box::before {
+    top: -0.5rem;
+    right: -0.5rem;
+}
+
+.pixel-box::after {
+    bottom: -0.5rem;
+    left: -0.5rem;
+}
+
+/* ─── Header ─── */
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Blinking underline cursor for name */
+.header h1 {
+    font-size: clamp(1.3rem, 4.5vw, 2rem);
+    color: var(--green);
+    text-shadow: 0 0 10px var(--green), 0 0 20px rgba(57, 255, 20, 0.4);
+    margin-bottom: 1.25rem;
+    animation: textGlow 2s ease-in-out infinite alternate;
+    letter-spacing: 0.05em;
+    word-break: break-word;
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 8px var(--green), 0 0 16px rgba(57, 255, 20, 0.3);
+    }
+
+    to {
+        text-shadow: 0 0 16px var(--green), 0 0 32px rgba(57, 255, 20, 0.6), 0 0 48px rgba(57, 255, 20, 0.2);
+    }
+}
+
+.header h2 {
+    font-size: clamp(0.65rem, 2.5vw, 1rem);
+    color: var(--cyan);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.08em;
+    word-break: break-word;
+}
+
+.location {
+    font-size: 0.72rem;
+    color: var(--yellow);
+    letter-spacing: 0.1em;
+}
+
+/* ─── Pixel tag badge ─── */
+.pixel-tag {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid var(--cyan);
+    color: var(--cyan);
+    font-family: var(--font);
+    font-size: 0.6rem;
+    padding: 0.3rem 0.6rem;
+    margin: 0.25rem;
+    cursor: default;
+    transition: background 0.1s steps(1), color 0.1s steps(1);
+    box-shadow: 2px 2px 0 var(--cyan);
+}
+
+.pixel-tag:hover {
+    background: var(--cyan);
+    color: var(--black);
+    box-shadow: 3px 3px 0 rgba(0, 255, 255, 0.5);
+}
+
+/* ─── Section headings ─── */
+.section-title {
+    font-size: 1.05rem;
+    color: var(--yellow);
+    border-bottom: 2px solid var(--yellow);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 8px rgba(255, 230, 0, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ─── Text ─── */
+p {
+    font-size: 0.65rem;
+    color: #ccc;
+    line-height: 2;
+    margin-bottom: 0.75rem;
+}
+
+p strong {
+    color: var(--cyan);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    font-size: 0.65rem;
+    color: #ccc;
+    line-height: 2;
+    padding-left: 1.25rem;
+    position: relative;
+    margin-bottom: 0.4rem;
+}
+
+ul li::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-size: 0.55rem;
+}
+
+/* ─── Skills grid ─── */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+/* ─── Pixel Button ─── */
+.pixel-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font);
+    font-size: 0.65rem;
+    background: var(--green);
+    color: var(--black);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 4px 4px 0 rgba(57, 255, 20, 0.4);
+    transition: transform 0.1s steps(1), box-shadow 0.1s steps(1);
+    letter-spacing: 0.05em;
+}
+
+.pixel-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(57, 255, 20, 0.5);
+}
+
+.pixel-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgba(57, 255, 20, 0.4);
+}
+
+.pixel-btn.outline {
+    background: transparent;
+    color: var(--magenta);
+    border: 3px solid var(--magenta);
+    box-shadow: 4px 4px 0 rgba(255, 0, 255, 0.35);
+}
+
+.pixel-btn.outline:hover {
+    background: var(--magenta);
+    color: var(--black);
+    box-shadow: 6px 6px 0 rgba(255, 0, 255, 0.45);
+}
+
+/* ─── Actions row ─── */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+/* ─── CTA section ─── */
+.cta {
+    text-align: center;
+}
+
+.cta .section-title {
+    font-size: 0.85rem;
+    color: var(--magenta);
+    border-bottom-color: var(--magenta);
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.5);
+}
+
+.cta-text {
+    font-size: 0.65rem;
+    color: #ccc;
+    line-height: 2.2;
+    max-width: 520px;
+    margin: 0 auto 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ─── Footer ─── */
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.55rem;
+    color: #555;
+    letter-spacing: 0.1em;
+    animation: blink 2s step-start infinite;
+}
+
+/* ─── Link to modern version ─── */
+.version-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    font-family: var(--font);
+    font-size: 0.55rem;
+    color: var(--yellow);
+    text-decoration: none;
+    border: 2px solid var(--yellow);
+    padding: 0.4rem 0.6rem;
+    box-shadow: 2px 2px 0 var(--yellow);
+    z-index: 100;
+    transition: background 0.1s steps(1);
+    letter-spacing: 0.05em;
+}
+
+.version-link:hover {
+    background: var(--yellow);
+    color: var(--black);
+}
+
+/* ─── XP Bar / Health bar decorative ─── */
+.xp-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.xp-label {
+    font-size: 0.52rem;
+    color: var(--yellow);
+    white-space: nowrap;
+}
+
+.xp-bar {
+    flex: 1;
+    height: 10px;
+    background: #111;
+    border: 2px solid var(--yellow);
+    position: relative;
+    overflow: hidden;
+}
+
+.xp-fill {
+    height: 100%;
+    background: var(--yellow);
+    animation: xpFill 2s steps(20) forwards;
+}
+
+@keyframes xpFill {
+    from {
+        width: 0%;
+    }
+}
+
+/* ─── Blink ─── */
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.blink {
+    animation: blink 1s step-start infinite;
+}
+
+/* ═══════════════════════════════════════
+   CHATBOT 8-BIT
+═══════════════════════════════════════ */
+
+#bot-widget {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+/* Avatar pixel art sprite */
+#bot-avatar {
+    width: 56px;
+    height: 56px;
+    background: var(--panel);
+    border: 3px solid var(--green);
+    box-shadow: 3px 3px 0 var(--green), 0 0 12px rgba(57, 255, 20, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    animation: avatarBob 1.8s ease-in-out infinite alternate;
+    flex-shrink: 0;
+}
+
+@keyframes avatarBob {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-5px);
+    }
+}
+
+/* Chat bubble */
+#bot-bubble {
+    background: var(--panel);
+    border: 3px solid var(--green);
+    box-shadow: 4px 4px 0 var(--green);
+    padding: 1rem 1.25rem;
+    width: clamp(260px, 80vw, 340px);
+    position: relative;
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    transition: opacity 0.2s steps(4), transform 0.2s steps(4);
+    pointer-events: none;
+}
+
+#bot-bubble.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+#bot-bubble.hidden {
+    display: none;
+}
+
+/* Triangle pointer */
+#bot-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    right: 18px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid var(--green);
+}
+
+/* Bot header bar */
+.bot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(57, 255, 20, 0.4);
+}
+
+.bot-name {
+    font-family: var(--font);
+    font-size: 0.52rem;
+    color: var(--green);
+    letter-spacing: 0.1em;
+}
+
+.bot-controls {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.bot-btn {
+    font-family: var(--font);
+    font-size: 0.52rem;
+    background: transparent;
+    border: 2px solid var(--green);
+    color: var(--green);
+    padding: 0.2rem 0.4rem;
+    cursor: pointer;
+    transition: background 0.1s steps(1), color 0.1s steps(1);
+}
+
+.bot-btn:hover {
+    background: var(--green);
+    color: var(--black);
+}
+
+#bot-text {
+    font-family: var(--font);
+    font-size: 0.58rem;
+    color: var(--white);
+    line-height: 2;
+    min-height: 3.5rem;
+    word-break: break-word;
+}
+
+/* Blinking cursor inside bot text */
+.bot-cursor {
+    display: inline-block;
+    color: var(--green);
+    animation: blink 0.7s step-start infinite;
+    margin-left: 1px;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 600px) {
+    .container {
+        padding: 2.5rem 1rem 7rem;
+    }
+
+    .pixel-box {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .header h1 {
+        font-size: clamp(0.75rem, 5vw, 1.1rem);
+    }
+
+    .header h2 {
+        font-size: 0.5rem;
+    }
+
+    #bot-widget {
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    #bot-bubble {
+        width: calc(100vw - 2rem);
+        right: -0.5rem;
+    }
+}
+
+/* ═══════════════════════════════════════
+   MINIJUEGO — BUG HUNT
+═══════════════════════════════════════ */
+
+/* Botón para abrir el minijuego */
+#open-minigame-btn {
+    background: transparent;
+    color: var(--red);
+    border: 3px solid var(--red);
+    box-shadow: 4px 4px 0 rgba(255, 34, 68, 0.4);
+    font-family: var(--font);
+}
+
+#open-minigame-btn:hover {
+    background: var(--red);
+    color: var(--white);
+    box-shadow: 6px 6px 0 rgba(255, 34, 68, 0.5);
+}
+
+/* Modal overlay */
+#minigame-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    z-index: 20000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+#minigame-modal.visible {
+    display: flex;
+}
+
+/* Modal window */
+.game-window {
+    background: var(--panel);
+    border: 4px solid var(--red);
+    box-shadow: 6px 6px 0 var(--red), 0 0 40px rgba(255, 34, 68, 0.3);
+    width: 100%;
+    max-width: 680px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Title bar */
+.game-titlebar {
+    background: var(--red);
+    color: var(--white);
+    font-family: var(--font);
+    font-size: 0.55rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+}
+
+.game-close-btn {
+    background: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
+    font-family: var(--font);
+    font-size: 0.5rem;
+    padding: 0.15rem 0.4rem;
+    cursor: pointer;
+    transition: background 0.1s steps(1);
+}
+
+.game-close-btn:hover {
+    background: var(--white);
+    color: var(--red);
+}
+
+/* HUD */
+.game-hud {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid rgba(255, 34, 68, 0.4);
+    background: rgba(255, 34, 68, 0.06);
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.hud-item {
+    font-family: var(--font);
+    font-size: 0.5rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.hud-item span {
+    color: var(--yellow);
+}
+
+.hud-item.timer span {
+    color: var(--cyan);
+    font-size: 0.65rem;
+}
+
+#game-combo {
+    font-family: var(--font);
+    font-size: 0.5rem;
+    color: var(--magenta);
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.7);
+    animation: blink 0.5s step-start infinite;
+    display: none;
+    margin-left: auto;
+}
+
+/* Timer bar */
+.game-timer-track {
+    height: 6px;
+    background: #111;
+    border-bottom: 2px solid rgba(255, 34, 68, 0.25);
+    flex-shrink: 0;
+}
+
+#game-timer-bar {
+    height: 100%;
+    background: var(--green);
+    transition: width 1s linear, background 1s linear;
+    width: 100%;
+}
+
+/* Arena */
+#game-arena {
+    position: relative;
+    flex: 1;
+    min-height: 320px;
+    overflow: hidden;
+    cursor: crosshair;
+    background:
+        repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(255, 34, 68, 0.05) 31px, rgba(255, 34, 68, 0.05) 32px),
+        repeating-linear-gradient(90deg, transparent, transparent 31px, rgba(255, 34, 68, 0.05) 31px, rgba(255, 34, 68, 0.05) 32px);
+}
+
+/* Overlay (start/end screen) */
+#game-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    z-index: 10;
+}
+
+.game-overlay-title {
+    font-family: var(--font);
+    font-size: clamp(0.9rem, 3vw, 1.4rem);
+    color: var(--red);
+    text-shadow: 0 0 16px rgba(255, 34, 68, 0.7);
+    letter-spacing: 0.06em;
+    text-align: center;
+}
+
+.game-overlay-sub {
+    font-family: var(--font);
+    font-size: 0.48rem;
+    color: #aaa;
+    text-align: center;
+    line-height: 2;
+    max-width: 340px;
+}
+
+/* Start button */
+#game-start-btn {
+    font-family: var(--font);
+    font-size: 0.6rem;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 0.85rem 2rem;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 rgba(255, 34, 68, 0.5);
+    letter-spacing: 0.08em;
+    transition: transform 0.1s steps(1), box-shadow 0.1s steps(1);
+}
+
+#game-start-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(255, 34, 68, 0.6);
+}
+
+#game-start-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgba(255, 34, 68, 0.4);
+}
+
+/* Result box */
+#game-result {
+    text-align: center;
+}
+
+.result-row {
+    font-family: var(--font);
+    font-size: 0.45rem;
+    color: #888;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.result-score {
+    font-family: var(--font);
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    color: var(--yellow);
+    text-shadow: 0 0 20px rgba(255, 230, 0, 0.6);
+    margin: 0.25rem 0;
+}
+
+.result-stats {
+    font-family: var(--font);
+    font-size: 0.42rem;
+    color: #aaa;
+    line-height: 2.2;
+    margin-top: 0.75rem;
+}
+
+/* Bugs */
+.game-bug {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+    animation: bugAppear 0.2s steps(3) forwards;
+    z-index: 2;
+    filter: drop-shadow(0 0 6px rgba(255, 34, 68, 0.5));
+    transition: transform 0.1s steps(1);
+}
+
+.game-bug:hover {
+    transform: translate(-50%, -50%) scale(1.25);
+    filter: drop-shadow(0 0 12px rgba(255, 34, 68, 0.8));
+}
+
+@keyframes bugAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.game-bug.bug-hit {
+    animation: bugHit 0.25s steps(3) forwards;
+}
+
+@keyframes bugHit {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.4);
+        filter: brightness(3);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.2);
+    }
+}
+
+.game-bug.bug-escape {
+    animation: bugEscape 0.3s steps(3) forwards;
+}
+
+@keyframes bugEscape {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+        filter: brightness(0);
+    }
+}
+
+/* Score popups */
+.score-popup {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-family: var(--font);
+    font-size: 0.65rem;
+    color: var(--green);
+    pointer-events: none;
+    animation: popupRise 0.7s steps(6) forwards;
+    z-index: 5;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.7);
+    white-space: nowrap;
+}
+
+.score-popup-combo {
+    color: var(--yellow);
+    font-size: 0.85rem;
+    text-shadow: 0 0 12px rgba(255, 230, 0, 0.8);
+}
+
+.score-popup-miss {
+    color: var(--red);
+    text-shadow: 0 0 8px rgba(255, 34, 68, 0.7);
+}
+
+@keyframes popupRise {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%, -120%);
+    }
+}
